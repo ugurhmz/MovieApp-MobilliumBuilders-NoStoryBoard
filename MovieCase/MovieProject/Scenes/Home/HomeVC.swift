@@ -6,14 +6,37 @@
 //
 
 import UIKit
+import MobilliumBuilders
 
 class HomeVC: UIViewController {
 
+    
+    private let collectionView = UICollectionViewBuilder()
+        .showsVerticalScrollIndicator(false)
+        .showsHorizontalScrollIndicator(false)
+        .backgroundColor(.purple)
+        .build()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemOrange
+        addSubviews()
+        configureContents()
     }
 
 
+}
+
+//MARK: -
+extension HomeVC {
+    private func addSubviews() {
+        view.addSubview(collectionView)
+        collectionView.fillSuperview()
+    }
+}
+
+extension HomeVC {
+    private func configureContents(){
+        
+    }
 }
 

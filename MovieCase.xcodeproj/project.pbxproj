@@ -18,6 +18,9 @@
 		63843A88282BFB660010F28F /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63843A87282BFB660010F28F /* HomeRouter.swift */; };
 		63843A8A282BFC090010F28F /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63843A89282BFC090010F28F /* MainNavigationController.swift */; };
 		63843A8C282BFC2C0010F28F /* PlaceOnWindowTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63843A8B282BFC2C0010F28F /* PlaceOnWindowTransition.swift */; };
+		63843A94282BFE2A0010F28F /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63843A93282BFE2A0010F28F /* Extension+UIView.swift */; };
+		63843A96282BFE4A0010F28F /* Closures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63843A95282BFE4A0010F28F /* Closures.swift */; };
+		63843A99282BFEDD0010F28F /* MobilliumBuilders in Frameworks */ = {isa = PBXBuildFile; productRef = 63843A98282BFEDD0010F28F /* MobilliumBuilders */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +37,8 @@
 		63843A87282BFB660010F28F /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
 		63843A89282BFC090010F28F /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		63843A8B282BFC2C0010F28F /* PlaceOnWindowTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceOnWindowTransition.swift; sourceTree = "<group>"; };
+		63843A93282BFE2A0010F28F /* Extension+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIView.swift"; sourceTree = "<group>"; };
+		63843A95282BFE4A0010F28F /* Closures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Closures.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63843A99282BFEDD0010F28F /* MobilliumBuilders in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,10 +72,10 @@
 		63843A58282BF5A30010F28F /* MovieCase */ = {
 			isa = PBXGroup;
 			children = (
-				63843A72282BF7010010F28F /* Utilities */,
-				63843A71282BF6F80010F28F /* UIComponents */,
 				63843A70282BF6E20010F28F /* MovieProject */,
+				63843A71282BF6F80010F28F /* UIComponents */,
 				63843A6F282BF6DE0010F28F /* DataProvider */,
+				63843A72282BF7010010F28F /* Utilities */,
 			);
 			path = MovieCase;
 			sourceTree = "<group>";
@@ -104,6 +110,9 @@
 		63843A72282BF7010010F28F /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				63843A92282BFE070010F28F /* Helper */,
+				63843A91282BFE020010F28F /* Extensions */,
+				63843A90282BFDFC0010F28F /* Constants */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -202,6 +211,29 @@
 			path = Transitions;
 			sourceTree = "<group>";
 		};
+		63843A90282BFDFC0010F28F /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				63843A95282BFE4A0010F28F /* Closures.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		63843A91282BFE020010F28F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				63843A93282BFE2A0010F28F /* Extension+UIView.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		63843A92282BFE070010F28F /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -218,6 +250,9 @@
 			dependencies = (
 			);
 			name = MovieCase;
+			packageProductDependencies = (
+				63843A98282BFEDD0010F28F /* MobilliumBuilders */,
+			);
 			productName = MovieCase;
 			productReference = 63843A56282BF5A30010F28F /* MovieCase.app */;
 			productType = "com.apple.product-type.application";
@@ -246,6 +281,9 @@
 				Base,
 			);
 			mainGroup = 63843A4D282BF5A30010F28F;
+			packageReferences = (
+				63843A97282BFEDD0010F28F /* XCRemoteSwiftPackageReference "MobilliumBuilders" */,
+			);
 			productRefGroup = 63843A57282BF5A30010F28F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -275,6 +313,8 @@
 				63843A84282BFA8F0010F28F /* Transition.swift in Sources */,
 				63843A5E282BF5A30010F28F /* HomeVC.swift in Sources */,
 				63843A5A282BF5A30010F28F /* AppDelegate.swift in Sources */,
+				63843A94282BFE2A0010F28F /* Extension+UIView.swift in Sources */,
+				63843A96282BFE4A0010F28F /* Closures.swift in Sources */,
 				63843A7C282BF7FA0010F28F /* AppRouter.swift in Sources */,
 				63843A82282BFA640010F28F /* Router.swift in Sources */,
 				63843A88282BFB660010F28F /* HomeRouter.swift in Sources */,
@@ -479,6 +519,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		63843A97282BFEDD0010F28F /* XCRemoteSwiftPackageReference "MobilliumBuilders" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mobillium/MobilliumBuilders.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		63843A98282BFEDD0010F28F /* MobilliumBuilders */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 63843A97282BFEDD0010F28F /* XCRemoteSwiftPackageReference "MobilliumBuilders" */;
+			productName = MobilliumBuilders;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 63843A4E282BF5A30010F28F /* Project object */;
 }
