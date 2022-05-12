@@ -25,6 +25,7 @@
 		63877803282CE02B00C065B5 /* MovieTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63877802282CE02B00C065B5 /* MovieTypes.swift */; };
 		63877805282CE13A00C065B5 /* HomeBottomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63877804282CE13A00C065B5 /* HomeBottomCell.swift */; };
 		63877808282CEDA800C065B5 /* Extension+UIView+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63877807282CEDA800C065B5 /* Extension+UIView+Border.swift */; };
+		6387780A282CF8A200C065B5 /* HomeTopSliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63877809282CF8A200C065B5 /* HomeTopSliderCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		63877802282CE02B00C065B5 /* MovieTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTypes.swift; sourceTree = "<group>"; };
 		63877804282CE13A00C065B5 /* HomeBottomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBottomCell.swift; sourceTree = "<group>"; };
 		63877807282CEDA800C065B5 /* Extension+UIView+Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIView+Border.swift"; sourceTree = "<group>"; };
+		63877809282CF8A200C065B5 /* HomeTopSliderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTopSliderCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -250,6 +252,7 @@
 			isa = PBXGroup;
 			children = (
 				638777FF282CDEBA00C065B5 /* HomeTopCell.swift */,
+				63877809282CF8A200C065B5 /* HomeTopSliderCell.swift */,
 			);
 			path = HomeTopCells;
 			sourceTree = "<group>";
@@ -356,6 +359,7 @@
 				63877800282CDEBA00C065B5 /* HomeTopCell.swift in Sources */,
 				63843A82282BFA640010F28F /* Router.swift in Sources */,
 				63877803282CE02B00C065B5 /* MovieTypes.swift in Sources */,
+				6387780A282CF8A200C065B5 /* HomeTopSliderCell.swift in Sources */,
 				63877805282CE13A00C065B5 /* HomeBottomCell.swift in Sources */,
 				63843A88282BFB660010F28F /* HomeRouter.swift in Sources */,
 				63843A8C282BFC2C0010F28F /* PlaceOnWindowTransition.swift in Sources */,
