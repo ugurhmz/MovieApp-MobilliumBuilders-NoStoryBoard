@@ -14,7 +14,7 @@ class HomeVC: UIViewController {
     private let homeCollectionView = UICollectionViewBuilder()
         .showsVerticalScrollIndicator(false)
         .showsHorizontalScrollIndicator(false)
-        .backgroundColor(.purple)
+        .backgroundColor(.white)
         .registerCell(HomeTopCell.self,
                       reuseIdentifier: HomeTopCell.identifier)
         .registerCell(HomeBottomCell.self,
@@ -83,7 +83,7 @@ extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate {
                 return UICollectionViewCell()
             }
             
-            bottomCell.backgroundColor = .red
+            bottomCell.backgroundColor = .white
             return bottomCell
         default:
             return UICollectionViewCell()
