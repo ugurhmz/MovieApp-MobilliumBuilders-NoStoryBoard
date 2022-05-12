@@ -21,6 +21,9 @@
 		63843A94282BFE2A0010F28F /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63843A93282BFE2A0010F28F /* Extension+UIView.swift */; };
 		63843A96282BFE4A0010F28F /* Closures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63843A95282BFE4A0010F28F /* Closures.swift */; };
 		63843A99282BFEDD0010F28F /* MobilliumBuilders in Frameworks */ = {isa = PBXBuildFile; productRef = 63843A98282BFEDD0010F28F /* MobilliumBuilders */; };
+		63877800282CDEBA00C065B5 /* HomeTopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638777FF282CDEBA00C065B5 /* HomeTopCell.swift */; };
+		63877803282CE02B00C065B5 /* MovieTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63877802282CE02B00C065B5 /* MovieTypes.swift */; };
+		63877805282CE13A00C065B5 /* HomeBottomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63877804282CE13A00C065B5 /* HomeBottomCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +42,9 @@
 		63843A8B282BFC2C0010F28F /* PlaceOnWindowTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceOnWindowTransition.swift; sourceTree = "<group>"; };
 		63843A93282BFE2A0010F28F /* Extension+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIView.swift"; sourceTree = "<group>"; };
 		63843A95282BFE4A0010F28F /* Closures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Closures.swift; sourceTree = "<group>"; };
+		638777FF282CDEBA00C065B5 /* HomeTopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTopCell.swift; sourceTree = "<group>"; };
+		63877802282CE02B00C065B5 /* MovieTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTypes.swift; sourceTree = "<group>"; };
+		63877804282CE13A00C065B5 /* HomeBottomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBottomCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +109,7 @@
 		63843A71282BF6F80010F28F /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				638777FD282CDE9100C065B5 /* HomeTopCells */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -110,6 +117,7 @@
 		63843A72282BF7010010F28F /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				63877801282CE02300C065B5 /* Enums */,
 				63843A92282BFE070010F28F /* Helper */,
 				63843A91282BFE020010F28F /* Extensions */,
 				63843A90282BFDFC0010F28F /* Constants */,
@@ -234,6 +242,23 @@
 			path = Helper;
 			sourceTree = "<group>";
 		};
+		638777FD282CDE9100C065B5 /* HomeTopCells */ = {
+			isa = PBXGroup;
+			children = (
+				638777FF282CDEBA00C065B5 /* HomeTopCell.swift */,
+				63877804282CE13A00C065B5 /* HomeBottomCell.swift */,
+			);
+			path = HomeTopCells;
+			sourceTree = "<group>";
+		};
+		63877801282CE02300C065B5 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				63877802282CE02B00C065B5 /* MovieTypes.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -316,7 +341,10 @@
 				63843A94282BFE2A0010F28F /* Extension+UIView.swift in Sources */,
 				63843A96282BFE4A0010F28F /* Closures.swift in Sources */,
 				63843A7C282BF7FA0010F28F /* AppRouter.swift in Sources */,
+				63877800282CDEBA00C065B5 /* HomeTopCell.swift in Sources */,
 				63843A82282BFA640010F28F /* Router.swift in Sources */,
+				63877803282CE02B00C065B5 /* MovieTypes.swift in Sources */,
+				63877805282CE13A00C065B5 /* HomeBottomCell.swift in Sources */,
 				63843A88282BFB660010F28F /* HomeRouter.swift in Sources */,
 				63843A8C282BFC2C0010F28F /* PlaceOnWindowTransition.swift in Sources */,
 				63843A86282BFB5F0010F28F /* HomeRoute.swift in Sources */,
