@@ -10,6 +10,7 @@ import MobilliumBuilders
 
 class HomeTopCell: UICollectionViewCell {
     static var identifier = "HomeTopCell"
+    weak var movieViewModel: HomeTopCellProtocol?
     
     private let topCellCollectionView = UICollectionViewBuilder()
         .scrollDirection(.horizontal)
@@ -35,6 +36,16 @@ class HomeTopCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("not imp")
+    }
+}
+
+
+//MARK: - Fill Data
+extension HomeTopCell {
+    func setData(movieData: HomeTopCellProtocol){
+        self.movieViewModel = movieData
+        self.pageControl.numberOfPages = movieData.numberOfItems
+        self.topCellCollectionView.reloadData()
     }
 }
 
@@ -80,18 +91,18 @@ extension HomeTopCell: UICollectionViewDelegate, UICollectionViewDataSource {
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return self.movieViewModel?.numberofItemsAtSection(section: section) ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
+      
         guard let sliderCell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeTopSliderCell.identifier, for: indexPath) as? HomeTopSliderCell else {
             return UICollectionViewCell()
         }
-        sliderCell.backgroundColor = UIColor(hue: drand48(),
-                                             saturation: 1,
-                                             brightness: 1,
-                                             alpha: 1)
+        
+        if let cellData = self.movieViewModel?.cellForItem(indexPath: indexPath) {
+            sliderCell.fillData(movie: cellData)
+        }
         return sliderCell
     }
     

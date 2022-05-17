@@ -25,7 +25,6 @@ struct APIRequestAdapter {
     }
 }
 
-
 // MARK: - Get Alamofire HTTPMethod
 extension RequestMethod {
     var toAlamofireHTTPMethod: HTTPMethod {

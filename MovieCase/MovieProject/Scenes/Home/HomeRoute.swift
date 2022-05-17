@@ -14,8 +14,8 @@ protocol HomeRoute {
 extension HomeRoute where Self: RouterProtocol {
     func placeOnWindowHome() {
            let router = HomeRouter()
-          // let viewModel = HomeViewModel(router: router)
-           let viewController = HomeVC()
+           let viewModel = HomeViewModel(router: router)
+           let viewController = HomeVC(viewModel: viewModel)
            let navigationController = MainNavigationController(rootViewController: viewController)
            
            let transition = PlaceOnWindowTransition()

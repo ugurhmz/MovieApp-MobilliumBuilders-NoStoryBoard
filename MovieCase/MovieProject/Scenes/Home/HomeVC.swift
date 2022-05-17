@@ -8,9 +8,8 @@
 import UIKit
 import MobilliumBuilders
 
-class HomeVC: UIViewController {
+class HomeVC: BaseViewController<HomeViewModel> {
 
-    
     private let homeCollectionView = UICollectionViewBuilder()
         .showsVerticalScrollIndicator(false)
         .showsHorizontalScrollIndicator(false)
@@ -26,6 +25,11 @@ class HomeVC: UIViewController {
         addSubviews()
         configureContents()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        viewModel.fetchNowPlayingMovies()
+    }
 
 
 }
@@ -35,6 +39,12 @@ extension HomeVC {
     private func addSubviews() {
         view.addSubview(homeCollectionView)
         homeCollectionView.fillSuperview()
+        
+        // reload collectionview
+        self.viewModel.reloadData = { [weak self] in
+            guard let self = self else {return }
+            self.homeCollectionView.reloadData()
+        }
     }
 }
 
@@ -69,12 +79,14 @@ extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate {
          
         // topCell
         case MovieTypes.NowPlayingMovies.rawValue:
-            guard let topCell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeTopCell.identifier,
-                                                                   for: indexPath) as? HomeTopCell else {
+            guard let topCell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeTopCell.identifier, for: indexPath) as? HomeTopCell else {
                 return UICollectionViewCell()
             }
             
-            topCell.backgroundColor = .green
+            if let movieValue = viewModel.homeTopCell {
+                topCell.setData(movieData: movieValue)
+            }
+            
             return topCell
             
         // bottomCell
@@ -104,7 +116,7 @@ extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate {
     
 }
 
-//MARK: -
+//MARK: - DelegateFlowLayout
 extension HomeVC: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

@@ -7,6 +7,7 @@
 
 import UIKit
 import MobilliumBuilders
+import Kingfisher
 
 class HomeTopSliderCell: UICollectionViewCell {
     static var identifier = "HomeTopSliderCell"
@@ -57,6 +58,21 @@ class HomeTopSliderCell: UICollectionViewCell {
     }
 }
 
+
+//MARK: -
+extension HomeTopSliderCell {
+    func fillData(movie: HomeSliderCellProtocol){
+        if let mvTitle = movie.movieTitle {
+            if let movieDate = movie.movieReleaseDate {
+                self.titleLbl.text = "\(mvTitle) (\(movieDate.prefix(4)))"
+            }
+        }
+        self.definitionLbl.text = movie.movieDefinition
+        self.movieImgView.kf.setImage(with: movie.movieImage)
+    }
+}
+
+//MARK: -
 extension HomeTopSliderCell {
     
     private func addSubviews() {

@@ -11,7 +11,6 @@ import Foundation
 final class APILogger: EventMonitor {
     
     static let shared = APILogger()
-    
     let queue = DispatchQueue(label: "com.mobillium.sampleproject.networklogger")
     
     func request(_ request: Request, didCreateURLRequest urlRequest: URLRequest) {
