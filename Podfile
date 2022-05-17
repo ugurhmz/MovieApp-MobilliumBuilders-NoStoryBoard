@@ -6,6 +6,9 @@ target 'MovieCase' do
   use_frameworks!
 
   # Pods for MovieCase
-  pod 'MobilliumBuilders'
+    pod 'MobilliumBuilders'
+    pod 'Alamofire', '~> 5.5'
+    pod 'Kingfisher', '~> 7.0'
+    pod 'SwiftEntryKit', '2.0.0'	
 
 end

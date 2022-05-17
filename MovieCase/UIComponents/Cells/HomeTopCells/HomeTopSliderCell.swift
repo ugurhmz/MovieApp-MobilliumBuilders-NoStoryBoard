@@ -15,7 +15,6 @@ class HomeTopSliderCell: UICollectionViewCell {
         .backgroundColor(.clear)
         .contentMode(.scaleToFill)
         .image(UIImage(named:"a5") ?? UIImage())
-        .cornerRadius(10)
         .clipsToBounds(true)
         .build()
     

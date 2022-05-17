@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "MobilliumBuilders",
+        "repositoryURL": "https://github.com/mobillium/MobilliumBuilders.git",
+        "state": {
+          "branch": null,
+          "revision": "8365aa0f227f51b7931a3c41331720c3f4d88a06",
+          "version": "1.4.2"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
