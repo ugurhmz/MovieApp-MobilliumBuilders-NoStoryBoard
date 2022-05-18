@@ -15,19 +15,17 @@ class HomeTopSliderCell: UICollectionViewCell {
     private let movieImgView = UIImageViewBuilder()
         .backgroundColor(.clear)
         .contentMode(.scaleToFill)
-        .image(UIImage(named:"a5") ?? UIImage())
         .clipsToBounds(true)
         .build()
     
  
-    private let transparentView = UIViewBuilder()
+    private var transparentView = UIViewBuilder()
         .backgroundColor(.black.withAlphaComponent(0.3))
         .build()
     
     
     private let titleLbl = UILabelBuilder()
-        .font(.systemFont(ofSize: 21, weight: .bold))
-        .text("Spider Man 2013")
+        .font(.systemFont(ofSize: 24, weight: .bold))
         .textColor(.white)
         .numberOfLines(2)
         .build()
@@ -36,7 +34,6 @@ class HomeTopSliderCell: UICollectionViewCell {
     private let definitionLbl = UILabelBuilder()
         .font(.systemFont(ofSize: 15, weight: .medium))
         .textColor(.white)
-        .text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also th")
         .numberOfLines(2)
         .build()
     
@@ -56,10 +53,18 @@ class HomeTopSliderCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("not imp")
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.movieImgView.image = nil
+        self.definitionLbl.text = nil
+        self.titleLbl.text = nil
+        
+    }
 }
 
 
-//MARK: -
+//MARK: - Fill Data
 extension HomeTopSliderCell {
     func fillData(movie: HomeSliderCellProtocol){
         if let mvTitle = movie.movieTitle {
@@ -72,7 +77,7 @@ extension HomeTopSliderCell {
     }
 }
 
-//MARK: -
+//MARK: - 
 extension HomeTopSliderCell {
     
     private func addSubviews() {

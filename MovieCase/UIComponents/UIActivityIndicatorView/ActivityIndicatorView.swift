@@ -19,8 +19,8 @@ public class ActivityIndicatorView: UIActivityIndicatorView {
     }
     
     private func commonInit() {
-        style = .gray
-        tintColor = .red
+        style = .large
+        tintColor = .blue
         hidesWhenStopped = true
     }
     

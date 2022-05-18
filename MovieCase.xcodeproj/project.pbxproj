@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		638087452834DDFB00023742 /* HomeBottomCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638087442834DDFB00023742 /* HomeBottomCellModel.swift */; };
+		638087472834E6EB00023742 /* MovieUpComingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638087462834E6EB00023742 /* MovieUpComingRequest.swift */; };
+		638087492834E75A00023742 /* MovieUpComingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638087482834E75A00023742 /* MovieUpComingModel.swift */; };
 		6381A68B28338E920068D8F4 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6381A68A28338E920068D8F4 /* BaseViewController.swift */; };
 		6381A68D28338F2C0068D8F4 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6381A68C28338F2C0068D8F4 /* BaseViewModel.swift */; };
 		6381A69128338FA50068D8F4 /* LoadingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6381A69028338FA50068D8F4 /* LoadingProtocol.swift */; };
@@ -56,6 +59,9 @@
 /* Begin PBXFileReference section */
 		55559E90C987C439EA7E2B19 /* Pods-MovieCase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieCase.release.xcconfig"; path = "Target Support Files/Pods-MovieCase/Pods-MovieCase.release.xcconfig"; sourceTree = "<group>"; };
 		56AA824E24F17D251C3B1245 /* Pods_MovieCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		638087442834DDFB00023742 /* HomeBottomCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBottomCellModel.swift; sourceTree = "<group>"; };
+		638087462834E6EB00023742 /* MovieUpComingRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieUpComingRequest.swift; sourceTree = "<group>"; };
+		638087482834E75A00023742 /* MovieUpComingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieUpComingModel.swift; sourceTree = "<group>"; };
 		6381A68A28338E920068D8F4 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		6381A68C28338F2C0068D8F4 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		6381A69028338FA50068D8F4 /* LoadingProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingProtocol.swift; sourceTree = "<group>"; };
@@ -161,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				6381A6B52833A1750068D8F4 /* MovieNowPlayingRequest.swift */,
+				638087462834E6EB00023742 /* MovieUpComingRequest.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -169,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				6381A6B82833A3FA0068D8F4 /* MovieNowPlayingModel.swift */,
+				638087482834E75A00023742 /* MovieUpComingModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -397,6 +405,7 @@
 			isa = PBXGroup;
 			children = (
 				63877804282CE13A00C065B5 /* HomeBottomCell.swift */,
+				638087442834DDFB00023742 /* HomeBottomCellModel.swift */,
 			);
 			path = HomeBottomCells;
 			sourceTree = "<group>";
@@ -555,11 +564,14 @@
 				6381A68B28338E920068D8F4 /* BaseViewController.swift in Sources */,
 				63843A94282BFE2A0010F28F /* Extension+UIView.swift in Sources */,
 				6381A6B62833A1750068D8F4 /* MovieNowPlayingRequest.swift in Sources */,
+				638087472834E6EB00023742 /* MovieUpComingRequest.swift in Sources */,
 				6381A6A32833934A0068D8F4 /* RequestEncoding.swift in Sources */,
 				63843A96282BFE4A0010F28F /* Closures.swift in Sources */,
+				638087452834DDFB00023742 /* HomeBottomCellModel.swift in Sources */,
 				6381A6B92833A3FA0068D8F4 /* MovieNowPlayingModel.swift in Sources */,
 				6381A6A1283392EC0068D8F4 /* RequestProtocol.swift in Sources */,
 				63843A7C282BF7FA0010F28F /* AppRouter.swift in Sources */,
+				638087492834E75A00023742 /* MovieUpComingModel.swift in Sources */,
 				63877800282CDEBA00C065B5 /* HomeTopCell.swift in Sources */,
 				6381A6BD2833A85A0068D8F4 /* HomeSliderCellModel.swift in Sources */,
 				6381A6A7283393930068D8F4 /* APIDecodableResponseRequest.swift in Sources */,

@@ -14,14 +14,12 @@ class HomeBottomCell: UICollectionViewCell {
     private let movieImgView = UIImageViewBuilder()
         .backgroundColor(.clear)
         .contentMode(.scaleToFill)
-        .image(UIImage(named:"a5") ?? UIImage())
         .cornerRadius(10)
         .clipsToBounds(true)
         .build()
     
     private let titleLbl = UILabelBuilder()
         .font(.systemFont(ofSize: 21, weight: .bold))
-        .text("Spider Man 2013")
         .textColor(.black)
         .numberOfLines(2)
         .build()
@@ -29,7 +27,6 @@ class HomeBottomCell: UICollectionViewCell {
     private let definitionLbl = UILabelBuilder()
         .font(.systemFont(ofSize: 15, weight: .medium))
         .textColor(.darkGray)
-        .text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also th")
         .numberOfLines(2)
         .build()
     
@@ -56,6 +53,22 @@ class HomeBottomCell: UICollectionViewCell {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         addSubviews()
+    }
+}
+
+
+//MARK: -
+extension HomeBottomCell {
+    func setData(movieVal: HomeBottomCellProtocol){
+        guard let movieImageUrl = movieVal.mvImg else { return}
+        self.definitionLbl.text = movieVal.mvDefinition
+        if let mvTitle = movieVal.mvTitle {
+            if let movieDate = movieVal.mvReleaseDate {
+                self.titleLbl.text = "\(mvTitle) (\(movieDate.prefix(4)))"
+            }
+        }
+        self.movieImgView.kf.setImage(with: movieImageUrl)
+        self.releaseDateLbl.text = movieVal.mvReleaseDate
     }
 }
 
@@ -88,7 +101,7 @@ extension HomeBottomCell {
                              leading: movieImgView.trailingAnchor,
                              bottom: nil,
                              trailing: contentView.trailingAnchor,
-                             padding: .init(top:10, left: 8, bottom: 8, right: 45))
+                             padding: .init(top:5, left: 8, bottom: 8, right: 45))
         
         goDetailIcon.anchor(top: titleLbl.bottomAnchor,
                             leading: nil,
@@ -97,11 +110,11 @@ extension HomeBottomCell {
                             padding: .init(top: 10, left: 20, bottom: 10, right: 5),
                             size: .init(width: 0, height: 35))
         
-        releaseDateLbl.anchor(top: nil,
+        releaseDateLbl.anchor(top: definitionLbl.bottomAnchor,
                               leading: nil,
                               bottom: bottomAnchor,
                               trailing: trailingAnchor,
-                              padding: .init(top: 0, left: 50, bottom: 20, right: 45))
+                              padding: .init(top: 10, left: 50, bottom: 20, right: 45))
     }
 }
 

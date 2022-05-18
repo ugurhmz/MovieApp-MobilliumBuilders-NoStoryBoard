@@ -11,6 +11,7 @@ protocol HomeViewDataSource {
 
     var homeTopCell: HomeTopCellProtocol? { get }
     var homeNowPlayingMovieArr: [HomeSliderCellProtocol]? { get set}
+    var homeUpComingArr: [HomeBottomCellProtocol]? { get set}
 }
 
 protocol HomeViewEventSource {
@@ -24,8 +25,9 @@ protocol HomeViewProtocol: HomeViewDataSource, HomeViewEventSource {
 
 final class HomeViewModel: BaseViewModel<HomeRouter>, HomeViewProtocol {
     
+    var homeUpComingArr: [HomeBottomCellProtocol]?  // upcoming
     var homeTopCell: HomeTopCellProtocol?
-    var homeNowPlayingMovieArr: [HomeSliderCellProtocol]?
+    var homeNowPlayingMovieArr: [HomeSliderCellProtocol]?   //now_playing
     var reloadData: VoidClosure?
     var endRefreshing: VoidClosure?
     let imgPath: String = "https://image.tmdb.org/t/p/original"
@@ -35,7 +37,7 @@ final class HomeViewModel: BaseViewModel<HomeRouter>, HomeViewProtocol {
     }
     
 
-    //MARK: - fetch now playing movies
+    //MARK: - FETCH NOW_PLAYINGS
     func fetchNowPlayingMovies() {
         let request = MovieNowPlayingRequest()
         dataProvider.request(for: request) { [weak self] result in
@@ -62,6 +64,31 @@ final class HomeViewModel: BaseViewModel<HomeRouter>, HomeViewProtocol {
         }
     }
     
+    
+    //MARK: - FETCH UPCOMING
+    func fetchUpComingMovies(page: Int?){
+        let request = MovieUpComingRequest(page: page ?? 1)
+        dataProvider.request(for: request) { [weak self] result in
+            guard let self = self else {return }
+            switch result {
+            case .success(let response):
+                guard let movieArr = response?.results?.map({
+                    return HomeBottomCellModel(mvId: $0.id,
+                                               mvImg: URL(string: self.imgPath + ($0.posterPath ?? "" )),
+                                               mvTitle: $0.title,
+                                               mvDefinition: $0.overview,
+                                               mvReleaseDate: $0.releaseDate)
+                }) else { return }
+                self.homeUpComingArr = movieArr
+                self.endRefreshing?()
+                self.reloadData?()
+            case .failure(let error):
+                self.endRefreshing?()
+                SnackHelper.showSnack(message: error.localizedDescription)
+            }
+        }
+        
+    }
     
     
 }

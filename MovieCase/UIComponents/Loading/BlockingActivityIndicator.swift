@@ -12,7 +12,7 @@ final class BlockingActivityIndicator: UIView {
     private let activityIndicator: UIActivityIndicatorView
     
     override init(frame: CGRect) {
-        self.activityIndicator = UIActivityIndicatorView(style: .gray)
+        self.activityIndicator = UIActivityIndicatorView(style: .large)
         activityIndicator.tintColor = .red
         activityIndicator.color = .white
         activityIndicator.startAnimating()

@@ -29,6 +29,7 @@ class HomeVC: BaseViewController<HomeViewModel> {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         viewModel.fetchNowPlayingMovies()
+        viewModel.fetchUpComingMovies(page: 1)
     }
 
 
@@ -55,7 +56,7 @@ extension HomeVC {
     }
 }
 
-//MARK: - UICollectionViewDataSource, UICollectionViewDelegate
+//MARK: - DataSource, Delegate
 extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -95,7 +96,10 @@ extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate {
                 return UICollectionViewCell()
             }
             
-            bottomCell.backgroundColor = .white
+            if let movieData = viewModel.homeUpComingArr {
+                bottomCell.setData(movieVal: movieData[indexPath.row])
+            }
+            
             return bottomCell
         default:
             return UICollectionViewCell()
@@ -113,7 +117,6 @@ extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate {
             return 0
         }
     }
-    
 }
 
 //MARK: - DelegateFlowLayout
@@ -129,7 +132,7 @@ extension HomeVC: UICollectionViewDelegateFlowLayout {
             
         case MovieTypes.UpComingMovies.rawValue:
             return CGSize(width: homeCollectionView.frame.width,
-                          height: homeCollectionView.frame.width - 264)
+                          height: homeCollectionView.frame.width - 240)
         default:
             return CGSize()
         }
