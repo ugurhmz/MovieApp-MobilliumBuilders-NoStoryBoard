@@ -28,11 +28,16 @@ class HomeVC: BaseViewController<HomeViewModel> {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        viewModel.fetchNowPlayingMovies()
-        viewModel.fetchUpComingMovies(page: 1)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.showActivityIndicator()
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                self.viewModel.fetchNowPlayingMovies()
+                self.viewModel.fetchUpComingMovies(page: 1)
+                self.hideActivityIndicator()
+            }
+        }
     }
-
-
 }
 
 //MARK: -
@@ -45,6 +50,7 @@ extension HomeVC {
         self.viewModel.reloadData = { [weak self] in
             guard let self = self else {return }
             self.homeCollectionView.reloadData()
+            
         }
     }
 }
@@ -130,6 +136,10 @@ extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate {
         default:
             return 0
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.viewModel.didSelectItem(at: indexPath)
     }
 }
 

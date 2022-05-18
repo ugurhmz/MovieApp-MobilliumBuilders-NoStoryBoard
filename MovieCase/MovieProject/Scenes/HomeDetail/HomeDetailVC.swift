@@ -9,7 +9,32 @@ import UIKit
 import MobilliumBuilders
 
 class HomeDetailVC: BaseViewController<HomeDetailViewModel>  {
-   
+    
+    private let navigationBar : UINavigationBar = {
+            let navBar = UINavigationBar()
+            let navigationItem =  UINavigationItem()
+            let button = UIBarButtonItem()
+            let standardAppearance = UINavigationBarAppearance()
+            standardAppearance.configureWithOpaqueBackground()
+            standardAppearance.titleTextAttributes = [.foregroundColor: UIColor.black]
+            standardAppearance.backgroundColor = .clear
+            navigationItem.standardAppearance = standardAppearance
+            navigationItem.scrollEdgeAppearance = standardAppearance
+            navigationItem.compactAppearance = standardAppearance
+            
+            let buttonAppearance = UIBarButtonItemAppearance()
+            buttonAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.black,.font : UIFont.systemFont(ofSize:23, weight: .bold)]
+            button.tintColor = .systemBlue
+            navigationItem.standardAppearance?.buttonAppearance = buttonAppearance
+            navigationItem.compactAppearance?.buttonAppearance = buttonAppearance
+            
+            button.image = UIImage(systemName: "chevron.left")
+            button.action = #selector(backToHomePageBtn)
+            navBar.layer.zPosition = 1
+            navigationItem.leftBarButtonItem = button
+            navBar.setItems([navigationItem], animated: false)
+            return navBar
+    }()
     
     private let movieImgView = UIImageViewBuilder()
         .image(UIImage(named: "a5") ?? UIImage())
@@ -63,30 +88,19 @@ class HomeDetailVC: BaseViewController<HomeDetailViewModel>  {
         super.viewDidLoad()
         setupViews()
         setConstraints()
-        settingsNavigateBar()
     }
+    
+    
 }
 
 //MARK: -
 extension HomeDetailVC {
     private func setupViews(){
         view.backgroundColor = .lightGray
-        [movieImgView,imdbImageIcon,starIcon,circleIcon,rateLabel,releaseDatelabel].forEach{ view.addSubview($0)}
+        [navigationBar,movieImgView,imdbImageIcon,starIcon,circleIcon,rateLabel,releaseDatelabel].forEach{ view.addSubview($0)}
         view.addSubview(titleLabel)
         view.addSubview(overviewLbl)
-    }
-    
-    private func settingsNavigateBar(){
-        let button = UIBarButtonItem()
-        let buttonAppearance = UIBarButtonItemAppearance()
-            buttonAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.black,.font : UIFont.systemFont(ofSize:26, weight: .bold)]
-        button.tintColor = .systemBlue
-        navigationItem.standardAppearance?.buttonAppearance = buttonAppearance
-        navigationItem.compactAppearance?.buttonAppearance = buttonAppearance
-        button.image = UIImage(systemName: "chevron.left")
-        button.action = #selector(backToHomePageBtn)
-
-        navigationItem.leftBarButtonItem = button
+        self.hideActivityIndicator()
     }
     
     @objc func backToHomePageBtn() {
@@ -94,8 +108,11 @@ extension HomeDetailVC {
     }
     
     private func setConstraints(){
-        
-        movieImgView.anchor(top: view.safeAreaLayoutGuide.topAnchor,
+        navigationBar.anchor(top: view.safeAreaLayoutGuide.topAnchor,
+                                    leading: view.leadingAnchor,
+                                    bottom: nil,
+                                    trailing: view.trailingAnchor)
+        movieImgView.anchor(top: view.topAnchor,
                               leading: view.leadingAnchor,
                               bottom: nil,
                               trailing: view.trailingAnchor,

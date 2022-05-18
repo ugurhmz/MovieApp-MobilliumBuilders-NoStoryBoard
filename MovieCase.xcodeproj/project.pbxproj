@@ -248,9 +248,9 @@
 		63843A71282BF6F80010F28F /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				6381A68E28338F810068D8F4 /* Cells */,
 				6381A694283390400068D8F4 /* UIActivityIndicatorView */,
 				6381A68F28338F960068D8F4 /* Loading */,
-				6381A68E28338F810068D8F4 /* Cells */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";

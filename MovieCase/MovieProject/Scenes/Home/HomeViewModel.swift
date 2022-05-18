@@ -24,9 +24,11 @@ protocol HomeViewProtocol: HomeViewDataSource, HomeViewEventSource {
     var increasePage: Int {get set}
     func getMoreMovieData()
     func fetchNowPlayingMovies()
+    func didSelectItem(at indexPath: IndexPath)
 }
 
 final class HomeViewModel: BaseViewModel<HomeRouter>, HomeViewProtocol {
+    
     var increasePage: Int = 1
     var isLoading: Bool = false
     var homeUpComingArr: [HomeBottomCellProtocol]?  // upcoming
@@ -91,6 +93,11 @@ final class HomeViewModel: BaseViewModel<HomeRouter>, HomeViewProtocol {
                 SnackHelper.showSnack(message: error.localizedDescription)
             }
         }
+    }
+    
+    func didSelectItem(at indexPath: IndexPath) {
+        let selectedId = homeUpComingArr?[indexPath.item].mvId ?? 0
+        router.pushHomeDetail(movieId: selectedId)
     }
 }
 
