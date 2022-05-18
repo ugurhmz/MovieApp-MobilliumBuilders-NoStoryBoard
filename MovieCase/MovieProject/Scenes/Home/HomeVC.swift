@@ -59,6 +59,21 @@ extension HomeVC {
 //MARK: - DataSource, Delegate
 extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate {
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let height = scrollView.frame.size.height
+        
+        if offsetY < -180.0 {
+            viewModel.fetchUpComingMovies(page: 1)
+        }
+        
+        if offsetY > contentHeight - height && !viewModel.isLoading {
+               viewModel.getMoreMovieData()
+               print("increasePage",viewModel.increasePage)
+        }
+    }
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
     }

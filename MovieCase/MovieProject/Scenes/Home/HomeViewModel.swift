@@ -20,11 +20,15 @@ protocol HomeViewEventSource {
 }
 
 protocol HomeViewProtocol: HomeViewDataSource, HomeViewEventSource {
+    var isLoading: Bool { get set}
+    var increasePage: Int {get set}
+    func getMoreMovieData()
     func fetchNowPlayingMovies()
 }
 
 final class HomeViewModel: BaseViewModel<HomeRouter>, HomeViewProtocol {
-    
+    var increasePage: Int = 1
+    var isLoading: Bool = false
     var homeUpComingArr: [HomeBottomCellProtocol]?  // upcoming
     var homeTopCell: HomeTopCellProtocol?
     var homeNowPlayingMovieArr: [HomeSliderCellProtocol]?   //now_playing
@@ -87,8 +91,30 @@ final class HomeViewModel: BaseViewModel<HomeRouter>, HomeViewProtocol {
                 SnackHelper.showSnack(message: error.localizedDescription)
             }
         }
-        
     }
-    
-    
+}
+
+
+//MARK: -
+extension HomeViewModel {
+    func getMoreMovieData(){
+        if !self.isLoading {
+            self.isLoading = true
+            DispatchQueue.global().async {
+                sleep(UInt32(1.2))
+                
+                if self.homeUpComingArr?.isEmpty == false {
+                    self.increasePage += 1
+                    self.fetchUpComingMovies(page: self.increasePage)
+                } else {
+                    self.increasePage = 1
+                    self.fetchUpComingMovies(page: self.increasePage)
+                }
+                
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                }
+            }
+        }
+    }
 }
