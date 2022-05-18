@@ -70,7 +70,6 @@ extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate {
         
         if offsetY > contentHeight - height && !viewModel.isLoading {
                viewModel.getMoreMovieData()
-               print("increasePage",viewModel.increasePage)
         }
     }
     
