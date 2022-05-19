@@ -31,10 +31,8 @@ class HomeVC: BaseViewController<HomeViewModel> {
         super.viewDidAppear(animated)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             self.showActivityIndicator()
-
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
                 self.viewModel.fetchNowPlayingMovies()
-               
                 self.hideActivityIndicator()
             }
         }
@@ -51,7 +49,6 @@ extension HomeVC {
         self.viewModel.reloadData = { [weak self] in
             guard let self = self else {return }
             self.homeCollectionView.reloadData()
-            
         }
     }
 }
@@ -74,7 +71,6 @@ extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate {
         if offsetY < -180.0 {
             viewModel.fetchUpComingMovies(page: 1)
         }
-        
         if offsetY > contentHeight - height && !viewModel.isLoading {
                viewModel.getMoreMovieData()
         }
@@ -109,6 +105,11 @@ extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate {
                 topCell.setData(movieData: movieValue)
             }
             
+            topCell.itemClosure = { [weak self] item in
+                guard let self = self else { return }
+                self.viewModel.didSelectTopItem(at: item)
+            }
+            
             return topCell
             
         // bottomCell
@@ -125,7 +126,6 @@ extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate {
         default:
             return UICollectionViewCell()
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

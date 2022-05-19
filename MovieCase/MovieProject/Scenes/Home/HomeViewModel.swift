@@ -99,6 +99,11 @@ final class HomeViewModel: BaseViewModel<HomeRouter>, HomeViewProtocol {
         let selectedId = homeUpComingArr?[indexPath.item].mvId ?? 0
         router.pushHomeDetail(movieId: selectedId)
     }
+    
+    func didSelectTopItem(at indexPath: IndexPath) {
+        let selectedId = homeNowPlayingMovieArr?[indexPath.item].movieId ?? 0
+        router.pushHomeDetail(movieId: selectedId)
+    }
 }
 
 

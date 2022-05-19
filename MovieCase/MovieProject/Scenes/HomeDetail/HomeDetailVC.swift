@@ -12,31 +12,28 @@ import Kingfisher
 class HomeDetailVC: BaseViewController<HomeDetailViewModel>  {
     
     private let navigationBar : UINavigationBar = {
-            let navBar = UINavigationBar()
-            let navigationItem =  UINavigationItem()
-            let button = UIBarButtonItem()
-            let standardAppearance = UINavigationBarAppearance()
-            standardAppearance.configureWithOpaqueBackground()
-            standardAppearance.titleTextAttributes = [.foregroundColor: UIColor.black]
-            standardAppearance.backgroundColor = .clear
-            navigationItem.standardAppearance = standardAppearance
-            navigationItem.scrollEdgeAppearance = standardAppearance
-            navigationItem.compactAppearance = standardAppearance
-            
-            let buttonAppearance = UIBarButtonItemAppearance()
-            buttonAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.black,.font : UIFont.systemFont(ofSize:23, weight: .bold)]
-            button.tintColor = .systemBlue
-            navigationItem.standardAppearance?.buttonAppearance = buttonAppearance
-            navigationItem.compactAppearance?.buttonAppearance = buttonAppearance
-            
-            button.image = UIImage(systemName: "chevron.left")
-            button.action = #selector(backToHomePageBtn)
-            navBar.layer.zPosition = 1
-            navigationItem.leftBarButtonItem = button
-            navBar.setItems([navigationItem], animated: false)
-            return navBar
-    }()
-    
+              let navBar = UINavigationBar()
+              let navigationItem =  UINavigationItem()
+              let button = UIBarButtonItem()
+              let standardAppearance = UINavigationBarAppearance()
+              standardAppearance.configureWithTransparentBackground()
+              navigationItem.standardAppearance = standardAppearance
+              navigationItem.scrollEdgeAppearance = standardAppearance
+              navigationItem.compactAppearance = standardAppearance
+              let buttonAppearance = UIBarButtonItemAppearance()
+              buttonAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.black,.font : UIFont.systemFont(ofSize:25, weight: .medium)]
+              button.tintColor = .systemBlue
+              navigationItem.standardAppearance?.buttonAppearance = buttonAppearance
+              navigationItem.compactAppearance?.buttonAppearance = buttonAppearance
+              
+              button.image = UIImage(systemName: "chevron.left")
+              button.action = #selector(backToHomePageBtn)
+              navBar.layer.zPosition = 1
+              
+              navigationItem.leftBarButtonItem = button
+              navBar.setItems([navigationItem], animated: false)
+              return navBar
+      }()
     
     private var generalCollectionView: UICollectionView = {
                let layout = UICollectionViewFlowLayout()
@@ -75,7 +72,6 @@ class HomeDetailVC: BaseViewController<HomeDetailViewModel>  {
               }
           }
        
-       //MARK: - SECOND SECTION
         static func createSecondSection() -> NSCollectionLayoutSection {
             
             let inset: CGFloat = 2
@@ -159,19 +155,12 @@ class HomeDetailVC: BaseViewController<HomeDetailViewModel>  {
         .isEditable(false)
         .textColor(.black)
         .build()
+    private let button = UIButton()
     
     override func viewDidLoad(){
         super.viewDidLoad()
-        generalCollectionView.dataSource = self
-               generalCollectionView.delegate = self
-                      
-               generalCollectionView.collectionViewLayout =  HomeDetailVC.createCompositionalLayout()
-        
-        generalCollectionView.layer.zPosition = 1
-        
         setupViews()
         setConstraints()
-       
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -179,7 +168,6 @@ class HomeDetailVC: BaseViewController<HomeDetailViewModel>  {
         viewModel.fetchDetailData()
         viewModel.fetchSimilarMovieData()
     }
-    
     
 }
 //MARK: - Delegate,DataSource
@@ -198,18 +186,14 @@ extension HomeDetailVC: UICollectionViewDelegate, UICollectionViewDataSource {
                             cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             let cell = generalCollectionView.dequeueReusableCell(withReuseIdentifier: "cellId",
                                                                  for: indexPath)
-            
             if indexPath.section == 0 {
                 let cell = generalCollectionView.dequeueReusableCell(withReuseIdentifier: SimilarMovieCollectionCell.identifier, for: indexPath) as! SimilarMovieCollectionCell
-              
                 
                 if let similarList = self.viewModel.similarMovieArr {
                     cell.fillSimilarData(movieValue: similarList[indexPath.row])
                 }
-                
                 return cell
             }
-            
             return cell
         }
    
@@ -222,11 +206,12 @@ extension HomeDetailVC: UICollectionViewDelegate, UICollectionViewDataSource {
          if indexPath.section == 0 {
              view.titleLabel.text = viewModel.headerSection
          }
-         
          return view
      }
-   
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        viewModel.didSelectSimilarItem(at: indexPath)
+    }
 }
 
 
@@ -256,11 +241,13 @@ extension HomeDetailVC {
 //MARK: - Constraints & setup
 extension HomeDetailVC {
     private func setupViews(){
-        [generalCollectionView,navigationBar,movieImgView,imdbImageIcon,starIcon,circleIcon,rateLabel,releaseDatelabel].forEach{ view.addSubview($0)}
-        view.addSubview(titleLabel)
-        view.addSubview(descriptionText)
+        [titleLabel,descriptionText,generalCollectionView,movieImgView,imdbImageIcon,starIcon,circleIcon,rateLabel,releaseDatelabel, navigationBar].forEach{ view.addSubview($0)}
         self.hideActivityIndicator()
-       
+        generalCollectionView.dataSource = self
+        generalCollectionView.delegate = self
+        generalCollectionView.collectionViewLayout =  HomeDetailVC.createCompositionalLayout()
+        generalCollectionView.layer.zPosition = 1
+        
         viewModel.reloadData = { [weak self] in
             guard let strongSelf = self else { return }
             self?.fillData()
@@ -274,9 +261,10 @@ extension HomeDetailVC {
     
     private func setConstraints(){
         navigationBar.anchor(top: view.safeAreaLayoutGuide.topAnchor,
-                                    leading: view.leadingAnchor,
-                                    bottom: nil,
-                                    trailing: view.trailingAnchor)
+                              leading: view.leadingAnchor,
+                              bottom: nil,
+                              trailing: view.trailingAnchor)
+        
         movieImgView.anchor(top: view.topAnchor,
                               leading: view.leadingAnchor,
                               bottom: nil,

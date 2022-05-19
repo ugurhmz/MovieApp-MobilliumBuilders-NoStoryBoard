@@ -11,6 +11,7 @@ import MobilliumBuilders
 class HomeTopCell: UICollectionViewCell {
     static var identifier = "HomeTopCell"
     weak var movieViewModel: HomeTopCellProtocol?
+    var itemClosure: IndexPathClosure?
     
     private let topCellCollectionView = UICollectionViewBuilder()
         .scrollDirection(.horizontal)
@@ -104,6 +105,10 @@ extension HomeTopCell: UICollectionViewDelegate, UICollectionViewDataSource {
             sliderCell.fillData(movie: cellData)
         }
         return sliderCell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.itemClosure?(indexPath)
     }
     
 }

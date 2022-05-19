@@ -67,6 +67,11 @@ class HomeDetailViewModel: BaseViewModel<HomeDetailRouter>, HomeDetailViewModelP
     var headerSection: String {
         return "Benzer Filmler"
     }
+    
+    func didSelectSimilarItem(at indexPath: IndexPath) {
+        let selectItemId = similarMovieArr?[indexPath.item].movieId ?? 0
+        router.pushHomeDetail(movieId: selectItemId)
+    }
 }
 
 //MARK: -  Fetch Data

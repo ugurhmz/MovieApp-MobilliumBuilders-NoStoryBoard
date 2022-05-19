@@ -11,7 +11,6 @@ import Kingfisher
 class SimilarMovieCollectionCell: UICollectionViewCell {
     static var identifier = "SimilarMovieCollectionCell"
     
-    // movie image
     private let movieImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleToFill
@@ -37,7 +36,6 @@ class SimilarMovieCollectionCell: UICollectionViewCell {
     private func setupViews(){
         addSubview(movieImageView)
         addSubview(titleLabel)
-        
     }
     
     required init?(coder: NSCoder) {
