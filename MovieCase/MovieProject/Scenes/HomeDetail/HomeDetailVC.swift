@@ -82,7 +82,7 @@ class HomeDetailVC: BaseViewController<HomeDetailViewModel>  {
             
             // item
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.4),
-                                                  heightDimension: .fractionalHeight(0.8))
+                                                  heightDimension: .fractionalHeight(1))
             
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
             item.contentInsets = NSDirectionalEdgeInsets(top: inset,
@@ -114,49 +114,41 @@ class HomeDetailVC: BaseViewController<HomeDetailViewModel>  {
     
     
     private let movieImgView = UIImageViewBuilder()
-        .image(UIImage(named: "a5") ?? UIImage())
         .contentMode(.scaleToFill)
         .build()
     
     private let imdbImageIcon = UIImageViewBuilder()
-        .image(UIImage(named: "imdbIcon") ?? UIImage())
         .contentMode(.scaleToFill)
         .build()
     
     private let starIcon = UIImageViewBuilder()
-        .image(UIImage(systemName: "star.fill") ?? UIImage())
         .contentMode(.scaleAspectFit)
         .tintColor(.systemYellow)
         .build()
     
     private let rateLabel = UILabelBuilder()
         .font(.systemFont(ofSize: 15, weight: .medium))
-        .text("7/10")
         .textColor(.black)
         .build()
     
     private let circleIcon = UIImageViewBuilder()
-        .image(UIImage(systemName: "circle.fill") ?? UIImage())
         .contentMode(.scaleAspectFit)
         .tintColor(.systemYellow)
         .build()
     
     private let releaseDatelabel = UILabelBuilder()
         .font(.systemFont(ofSize: 15, weight: .medium))
-        .text("26-04-1994")
         .textColor(.black)
         .build()
     
     private let titleLabel = UILabelBuilder()
         .font(.systemFont(ofSize: 23, weight: .bold))
-        .text("SpiderMan")
         .textColor(.black)
         .numberOfLines(2)
         .build()
     
     private let overviewLbl = UILabelBuilder()
         .font(.systemFont(ofSize: 17, weight: .regular))
-        .text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.")
         .textColor(.black)
         .numberOfLines(0)
         .build()
@@ -179,7 +171,13 @@ class HomeDetailVC: BaseViewController<HomeDetailViewModel>  {
         
         setupViews()
         setConstraints()
+       
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         viewModel.fetchDetailData()
+        viewModel.fetchSimilarMovieData()
     }
     
     
@@ -193,7 +191,7 @@ extension HomeDetailVC: UICollectionViewDelegate, UICollectionViewDataSource {
        
       func collectionView(_ collectionView: UICollectionView,
                           numberOfItemsInSection section: Int) -> Int {
-          return 5
+          return self.viewModel.numberItemsInSection
       }
    
         func collectionView(_ collectionView: UICollectionView,
@@ -204,8 +202,11 @@ extension HomeDetailVC: UICollectionViewDelegate, UICollectionViewDataSource {
             if indexPath.section == 0 {
                 let cell = generalCollectionView.dequeueReusableCell(withReuseIdentifier: SimilarMovieCollectionCell.identifier, for: indexPath) as! SimilarMovieCollectionCell
               
-                cell.backgroundColor = .green
-                cell.layer.cornerRadius = 20
+                
+                if let similarList = self.viewModel.similarMovieArr {
+                    cell.fillSimilarData(movieValue: similarList[indexPath.row])
+                }
+                
                 return cell
             }
             
@@ -218,8 +219,8 @@ extension HomeDetailVC: UICollectionViewDelegate, UICollectionViewDataSource {
          
          let view = collectionView.dequeueReusableSupplementaryView(ofKind: "header", withReuseIdentifier: HeaderReusableView.identifier, for: indexPath) as! HeaderReusableView
          
-         if indexPath.section == 0{
-             view.titleLabel.text = "Benzer Filmler"
+         if indexPath.section == 0 {
+             view.titleLabel.text = viewModel.headerSection
          }
          
          return view
@@ -261,7 +262,9 @@ extension HomeDetailVC {
         self.hideActivityIndicator()
        
         viewModel.reloadData = { [weak self] in
+            guard let strongSelf = self else { return }
             self?.fillData()
+            strongSelf.generalCollectionView.reloadData()
         }
     }
     
@@ -342,7 +345,7 @@ extension HomeDetailVC {
                                             bottom: view.bottomAnchor,
                                             trailing: view.trailingAnchor,
                                             padding: .init(top: 0,
-                                                            left: 5, bottom: 10, right: 0),
-                                            size: .init(width: 0, height: 180))
+                                                            left: 5, bottom: 15, right: 0),
+                                            size: .init(width: 0, height: 220))
     }
 }

@@ -24,6 +24,7 @@ class HomeVC: BaseViewController<HomeViewModel> {
         super.viewDidLoad()
         addSubviews()
         configureContents()
+        self.viewModel.fetchUpComingMovies(page: 1)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -33,7 +34,7 @@ class HomeVC: BaseViewController<HomeViewModel> {
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 self.viewModel.fetchNowPlayingMovies()
-                self.viewModel.fetchUpComingMovies(page: 1)
+               
                 self.hideActivityIndicator()
             }
         }

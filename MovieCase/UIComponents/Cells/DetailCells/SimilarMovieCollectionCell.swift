@@ -14,7 +14,6 @@ class SimilarMovieCollectionCell: UICollectionViewCell {
     // movie image
     private let movieImageView: UIImageView = {
         let iv = UIImageView()
-        iv.image = UIImage(named:"v4")
         iv.contentMode = .scaleToFill
         iv.layer.cornerRadius = 20
         iv.clipsToBounds = true
@@ -24,8 +23,8 @@ class SimilarMovieCollectionCell: UICollectionViewCell {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16, weight: .medium)
-        label.textColor = .darkGray
-        label.numberOfLines = 2
+        label.textColor = .black
+        label.numberOfLines = 3
         return label
     }()
     
@@ -38,6 +37,7 @@ class SimilarMovieCollectionCell: UICollectionViewCell {
     private func setupViews(){
         addSubview(movieImageView)
         addSubview(titleLabel)
+        
     }
     
     required init?(coder: NSCoder) {
@@ -45,16 +45,16 @@ class SimilarMovieCollectionCell: UICollectionViewCell {
     }
 }
 
-//MARK: -
+//MARK: - Fill Data
 extension SimilarMovieCollectionCell {
-//    func fillSimilarData(movieValue: SimilarCellProtocoL) {
-//        
-////        guard let movieImg = movieValue.movieImageUrl else {
-////            return
-////        }
-////        self.movieImageView.kf.setImage(with: movieImg )
-////        self.titleLabel.text = movieValue.movieTitle
-//    }
+    func fillSimilarData(movieValue: SimilarCellProtocoL) {
+        
+        guard let movieImg = movieValue.movieImageUrl else {
+            return
+        }
+        self.movieImageView.kf.setImage(with: movieImg )
+        self.titleLabel.text = movieValue.movieTitle
+    }
 }
 
 
@@ -64,7 +64,7 @@ extension SimilarMovieCollectionCell {
                               leading: leadingAnchor,
                               bottom: nil,
                               trailing: trailingAnchor,
-                              size: .init(width: 0, height: 142)
+                              size: .init(width: 0, height: 112 )
         )
         
         titleLabel.anchor(top: movieImageView.bottomAnchor,

@@ -14,6 +14,10 @@ protocol HomeDetailViewModelDataSource {
     var movieTitle: String? { get }
     var movieDefinition: String? {get}
     var movieReleaseData: String? {get}
+    var similarMovieArr: [SimilarCellProtocoL]? { get set}
+    func cellItem(for indexPath: IndexPath) -> SimilarCellProtocoL
+    var similarCell: SimilarCellProtocoL? {get}
+    var numberItemsInSection: Int { get }
 }
 
 protocol HomeDetailViewEventSource {
@@ -27,7 +31,8 @@ protocol HomeDetailViewModelProtocol: HomeDetailViewModelDataSource, HomeDetailV
 
 //MARK: -
 class HomeDetailViewModel: BaseViewModel<HomeDetailRouter>, HomeDetailViewModelProtocol {
-    
+    var similarMovieArr: [SimilarCellProtocoL]? = []
+    var similarCell: SimilarCellProtocoL?
     var movieImageUrl: URL?
     var movieRate: Double?
     var movieTitle: String?
@@ -50,6 +55,18 @@ class HomeDetailViewModel: BaseViewModel<HomeDetailRouter>, HomeDetailViewModelP
         self.movieImageUrl = URL(string: imgPath + (detailModel.posterPath ?? "") )
         self.movieReleaseData = detailModel.releaseDate
     }
+    
+    func cellItem(for indexPath: IndexPath) -> SimilarCellProtocoL {
+        return similarMovieArr?[indexPath.row] ?? SimilarCellModel()
+    }
+    
+    var numberItemsInSection: Int {
+          return similarMovieArr?.count ?? 0
+    }
+    
+    var headerSection: String {
+        return "Benzer Filmler"
+    }
 }
 
 //MARK: -  Fetch Data
@@ -70,5 +87,28 @@ extension HomeDetailViewModel {
                   SnackHelper.showSnack(message: error.localizedDescription)
               }
           }
-      }
+    }
+    
+    func fetchSimilarMovieData(){
+        let request = MovieSimilarRequest(movieId: movieId ?? 0)
+        dataProvider.request(for: request) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let response):
+                guard let movieArr = response.results?.map({
+                    return SimilarCellModel(movieId: $0.id,
+                                            movieTitle: $0.title,
+                                            movieReleaseDate: $0.releaseDate,
+                                            movieImageUrl: URL(string: self.imgPath + ($0.poster_path ?? "")))
+                }) else {return }
+                self.similarMovieArr = movieArr
+               
+                self.endRefreshing?()
+                self.reloadData?()
+            case .failure(let error):
+                self.endRefreshing?()
+                SnackHelper.showSnack(message: error.localizedDescription)
+            }
+        }
+    }
 }
